@@ -11,3 +11,4 @@ wheels/
 .env
 openapi.json
 openapi.json.etag
+.DS_Store
