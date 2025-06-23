@@ -128,6 +128,11 @@ async def nql_guide() -> Any:
         content = file.read()
     return {"content": content}
 
+def main():
+    """
+    Main function to run the MCP server.
+    """
+    mcp.run()
 
 if __name__ == "__main__":
-    mcp.run()
+    main()
