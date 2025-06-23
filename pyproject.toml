@@ -1,0 +1,17 @@
+[project]
+authors = [
+  {name = "Netography"},
+]
+dependencies = [
+  "fastmcp>=2.9.0",
+  "httpx>=0.28.1",
+  "mcp[cli]>=1.9.4",
+  "pyjwt>=2.10.1",
+  "python-dotenv>=1.1.0",
+  "pyyaml>=6.0.2",
+]
+description = "Netography MCP Server"
+name = "neto-mcp-server"
+readme = "README.md"
+requires-python = ">=3.11"
+version = "0.1.0"
