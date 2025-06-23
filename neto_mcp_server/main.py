@@ -15,7 +15,7 @@ from fastmcp.server.openapi import (
     RouteMap,
 )
 
-from neto.api import NetoAPI
+from neto_mcp_server.neto.api import NetoAPI
 
 logging.basicConfig(stream=sys.stderr, level=logging.INFO)
 logging.info("Starting Netography Fusion MCP...")
