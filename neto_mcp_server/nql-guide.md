@@ -1,10 +1,4 @@
-# NQL Overview and  Syntax
-
-The Netography Query Language Explained
-
-Refer to the [NQL Quick Reference Guide](doc:nql-quick) for all the NQL syntax in one table.
-
-# Overview
+# NQL Overview and Syntax
 
 The Netography Query Language (NQL) is the basis for accomplishing many tasks in Fusion.
 
