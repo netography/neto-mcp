@@ -35,13 +35,6 @@ A local MCP server for [Netography Fusion](https://netography.com/), supporting 
    ```bash
    uv sync
    ```
-
-4. **Install the MCP server tool**
-
-   ```bash
-   uv tool install .
-   ```
-
 ---
 
 ## Configuration
@@ -67,14 +60,17 @@ source ~/.bash_profile
 ```
 
 **Option 2: VS Code `settings.json`**
-Add the following to your VS Code `settings.json`:
+Add the following to your VS Code `settings.json`, replacing the `NETO_MCP_SERVER_REPO_DIR` with your actual path and `your-netography-secret` with your actual secret:
 
 ```json
 "mcp": {
   "servers": {
     "netography": {
-      "command": "uvx",
+      "command": "uv",
       "args": [
+        "run",
+        "--directory",
+        "NETO_MCP_SERVER_REPO_DIR",
         "neto-mcp-server"
       ],
       "env": {
@@ -90,7 +86,7 @@ Add the following to your VS Code `settings.json`:
 **From the command line:**
 
 ```bash
-uvx neto-mcp-server
+uv run --directory NETO_MCP_SERVER_REPO_DIR neto-mcp-server
 ```
 
 **From VS Code:**
