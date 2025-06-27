@@ -7,9 +7,10 @@ A local MCP server for [Netography Fusion](https://netography.com/), supporting 
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [Running the Server](#running-the-server)
+- [Claude Desktop Integration](#claude-desktop-integration)
 - [VS Code Integration](#vs-code-integration)
-- [Copilot Chat Example Queries](#copilot-chat-example-queries)
+- [Example Queries](#example-queries)
+- [Running the Server Manually](#running-the-server-manually)
 - [Troubleshooting](#troubleshooting)
 
 ## Prerequisites
@@ -20,7 +21,8 @@ A local MCP server for [Netography Fusion](https://netography.com/), supporting 
 
 ## Installation
 
-1. **Install `uv`**  
+1. **Install `uv`**
+
    Follow the [official instructions](https://github.com/astral-sh/uv?tab=readme-ov-file#installation) for your OS.
 
 2. **Clone the repository**
@@ -35,20 +37,19 @@ A local MCP server for [Netography Fusion](https://netography.com/), supporting 
    ```bash
    uv sync
    ```
----
 
 ## Configuration
 
 ### Setting the `NETOSECRET` Environment Variable
 
-The MCP server requires a Netography API secret. You can set this in your shell or directly in your VS Code settings.
+The MCP server requires a Netography API secret. You can set this in your shell or directly in your Claude Desktop or VS Code settings.
 
-**Option 1: Shell**
+**Shell Configuration (for manual server runs):**
 
 For zsh:
 
 ```bash
-echo 'export NETOSECRET="REPLACEME"' >> ~/.zshrc
+echo 'export NETOSECRET="your-netography-secret"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
@@ -59,8 +60,58 @@ echo 'export NETOSECRET="your-netography-secret"' >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
-**Option 2: VS Code `settings.json`**
-Add the following to your VS Code `settings.json`, replacing the `NETO_MCP_SERVER_REPO_DIR` with your actual path and `your-netography-secret` with your actual secret:
+## Claude Desktop Integration
+
+### Setup
+
+1. **Locate the configuration file:**
+  Go to Settings > Developer and click the Edit Config button.  This will open the configuration file.  Alternatively, you can find the file at the following locations based on your OS:
+
+   - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+
+2. **Edit the configuration file** with the following structure:
+
+   ```json
+   {
+     "mcpServers": {
+       "netography": {
+         "command": "/full/path/to/uv",
+         "args": [
+           "run",
+           "--directory",
+           "/full/path/to/your/neto-mcp-server",
+           "neto-mcp-server"
+         ],
+         "env": {
+           "NETOSECRET": "your-netography-secret"
+         }
+       }
+     }
+   }
+   ```
+
+3. **Important configuration notes:**
+   - **Use full paths:** You must provide the complete absolute path to both the `uv` executable and your `neto-mcp-server` directory
+   - **Find your uv path:** Run `which uv` in your terminal to get the full path
+   - **Replace placeholders:**
+     - Replace `/full/path/to/uv` with the output from `which uv`
+     - Replace `/full/path/to/your/neto-mcp-server` with the absolute path to your cloned repository
+     - Replace `your-netography-secret` with your actual Netography API secret
+
+4. **Restart Claude Desktop** after saving the configuration file for the changes to take effect.
+
+### Usage
+
+Once configured, Claude Desktop will automatically load and manage the MCP server - no manual starting required. Simply mention Netography queries in your conversations and Claude will use the MCP tools to fetch data from your Fusion instance.  Clicking the search and tools icon (next to the +) in the chat box will allow you to select the `netography` server as a tool and select particular API endpoints to enable/disable
+
+**Note for Claude Desktop Free users:** Free tier users may encounter context length limitations when using multiple MCP tools. If you experience issues, consider disabling some API endpoints/tools in your MCP server configuration to reduce context size.
+
+## VS Code Integration
+
+### Setup
+
+Add the following to your VS Code `settings.json`, replacing the `NETO_MCP_SERVER_REPO_DIR` with the path to the git repo mcp-server directory and `your-netography-secret` with your actual secret:
 
 ```json
 "mcp": {
@@ -81,7 +132,32 @@ Add the following to your VS Code `settings.json`, replacing the `NETO_MCP_SERVE
 }
 ```
 
-## Running the Server
+### Usage
+
+1. Open the Command Palette (`Cmd+Shift+P`), search for "MCP: List Servers", and select the `netography` server and then select "Start Server".
+2. Confirm the server status is "running" in the MCP output panel.
+3. In Copilot Chat, type `@netography` as part of your chat to include usage of the MCP tool.  Alternatively, click 'Add Context...', select 'Tools', and choose the `netography` server.
+
+## Example Queries
+
+- **Find top IPs:**
+  Find the top 10 IPs by flow volume in the past hour from Netography data.
+
+- **Count traffic sources:**
+  How many traffic sources are configured in Netography
+
+- **List all traffic sources:**
+  List all configured traffic sources in Netography
+
+- **Show flows for a specific IP:**
+  Show all network flows for IP 192.0.2.1 in the last 24 hours in Netography
+
+- **Get traffic by protocol:**
+  Summarize network traffic by protocol for the past 7 days in Netography
+
+## Running the Server Manually
+
+If you prefer to run the MCP server manually instead of through VS Code or Claude Desktop, you can do so using the command line.
 
 **From the command line:**
 
@@ -89,52 +165,19 @@ Add the following to your VS Code `settings.json`, replacing the `NETO_MCP_SERVE
 uv run --directory NETO_MCP_SERVER_REPO_DIR neto-mcp-server
 ```
 
-**From VS Code:**
-
-1. Open the Command Palette (`Cmd+Shift+P`), search for "MCP: List Servers", and select the `netography` server and then select "Start Server".
-2. Confirm the server status is "running" in the MCP output panel.
-
-## Usage with VS Code and Copilot Chat
-
-### Configuring Copilot Chat to Use the MCP Tool
-
-Click 'Add Context...' in Copilot Chat, select 'Tools', and choose the `netography` server. This will enable the MCP tool for your chat session.
-
-- **Find top IPs:**
-
-  ```
-  Use Netography MCP to find the top 10 IPs for flow in the past 1 hour.
-  ```
-
-- **Count traffic sources:**
-
-  ```
-  Use Netography MCP to count the number of configured traffic sources.
-  ```
-
-- **List all traffic sources:**
-
-  ```
-  Use Netography MCP to list all configured traffic sources.
-  ```
-
-- **Show flows for a specific IP:**
-
-  ```
-  Use Netography MCP to show all flows for IP 192.0.2.1 in the last 24 hours.
-  ```
-
-- **Get traffic by protocol:**
-
-  ```
-  Use Netography MCP to summarize traffic by protocol for the past 7 days.
-  ```
-
----
-
 ## Troubleshooting
 
-- **Server not starting?**  
-  Ensure `NETOSECRET` is set and dependencies are installed.
-- **No response in Copilot Chat?**  
+- **Server not starting?**
+  Ensure `NETOSECRET` is set and dependencies are installed with `uv sync`.
+
+- **No response in Copilot Chat?**
   Confirm the MCP server is running and selected as a tool in Copilot Chat.
+
+- **Copilot Chat is always calling the wrong API endpoint and never answering my questions?**
+  MCP support in Copilot is very much in early and active development.  We have seen it work perfectly on one Copilot instance and fail entirely on another.  We have had more reliable results using Claude Desktop over Copilot Chat to interact with MCP servers (Anthropic created MCP so they are definitely a bit ahead in support right now).  You may want to try using VS Code Insider and the pre-release Copilot Chat extensions to get the latest features and fixes.
+
+- **Claude Desktop not recognizing the server?**
+  Verify that you're using full absolute paths in your `claude_desktop_config.json` and that the file is in the correct location for your operating system.
+
+- **Permission errors?**
+  Ensure that the `uv` executable and your project directory have the proper read/execute permissions.
