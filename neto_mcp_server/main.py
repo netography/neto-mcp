@@ -128,11 +128,35 @@ async def nql_guide() -> Any:
         content = file.read()
     return {"content": content}
 
+
+@mcp.tool
+async def get_detection_model_list() -> list[str]:
+    """
+    Get the list of available detection models.
+    """
+    response = await api_client.get("/api/v1/docs/detection-models")
+    response.raise_for_status()
+    models = response.json()["data"]
+    return [model["name"] for model in models]
+
+
+@mcp.tool
+async def get_detection_model_details(model_name: str) -> dict[str, Any]:
+    """
+    Get the details of a specific detection model.
+    """
+    response = await api_client.get("/api/v1/docs/detection-models")
+    response.raise_for_status()
+    models = response.json()["data"]
+    return next((model for model in models if model["name"] == model_name), None)
+
+
 def main():
     """
     Main function to run the MCP server.
     """
     mcp.run()
+
 
 if __name__ == "__main__":
     main()
