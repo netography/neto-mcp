@@ -1,3 +1,4 @@
+import argparse
 import json
 import logging
 import os
@@ -155,7 +156,16 @@ def main():
     """
     Main function to run the MCP server.
     """
-    mcp.run()
+    parser = argparse.ArgumentParser(description="Run the Netography MCP server.")
+    parser.add_argument(
+        "--transport",
+        "-t",
+        choices=["stdio", "streamable-http", "sse"],
+        help="The transport method to use.",
+        default="stdio",
+    )
+    args = parser.parse_args()
+    mcp.run(transport=args.transport)
 
 
 if __name__ == "__main__":

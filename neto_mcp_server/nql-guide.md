@@ -6,31 +6,13 @@ The Netography Query Language (NQL) is the basis for accomplishing many tasks in
 - Filtering statistics and aggregations
 - Defining custom Detection Models to create an event 
 
-Becoming familiar with NQL will help you take full advantage of the Fusion platform.  
-
-> 📘 Comparing NQL to Other Query Languages
-> 
-> NQL is designed specifically for network traffic and security analytics, with features optimized for querying this type of data. Unlike SQL, which is a general-purpose query language for relational databases, NQL is tailored to operate on high-throughput network data with a focus on real-time analysis. Similar to Splunk's SPL (Search Processing Language) and Elasticsearch's Query DSL, NQL provides specialized operators and pattern matching capabilities, making it well-suited for dynamic network environments. However, NQL's syntax and rules are distinct, reflecting its purpose-built nature for network security operations.
-
 # Using NQL in Fusion
 
-In the Fusion Portal, NQL can be used In the Global Filter (the bar at the top of the Portal), in Detection Models, or to define widgets inside custom dashboards.  It can be used in the API as the value for the `search` parameter if it exists.
-
-## Applying NQL
-
-Results on each page are filtered by the _Global Filter_, the combination of the date/time range you select and the NQL filter you enter.  
-
-> 📘 The button in the Global Filter changes to UPDATE when you need to apply a new value
-> 
-> If it says **UPDATE**, that means you changed a value but have not yet applied it.  Apply the filter by clicking the **UPDATE** button, or pressing Enter in the NQL text box.
-> 
-> [block:image]{"images":[{"image":["https://files.readme.io/f067f44a1b56b5b15d2c0abd3085a1d0a2a28bae56695bb6b2ae886bb67e01c3-fusion-filter-update.png","",""],"align":"center"}]}[/block]
+NQL can be used in Detection Models, or to define widgets inside custom dashboards. It can be used in the API as the value for the `search` parameter if it exists.
 
 # NQL Syntax
 
 ## NQL Examples
-
-Use the [NQL Presets](doc:nql-presets) to see additional examples.
 
 | Description           | NQL                                                                |
 | --------------------- | ------------------------------------------------------------------ |
@@ -38,8 +20,6 @@ Use the [NQL Presets](doc:nql-presets) to see additional examples.
 | Only Privileged Ports | `dstport < 1024`                                                   |
 | Not Broadcast IPs     | `dstip != 255.255.255.0/24`                                        |
 | TCP Ports Scan        | `tcpflags.syn == true and tcpflags.ack == true and srcport > 1024` |
-
-For additional examples, see [NQL Examples](doc:nql-examples).
 
 ## NQL Basics
 
@@ -61,10 +41,6 @@ Using the Netography Query Language is like writing a programming conditional in
 ### CIDR Notation
 
 - IP fields can be searched with CIDR notation if desired. For example, `10.0.0.0/24` will match `10.0.0.1`
-
-> 📘 CIDR (Classless Inter-Domain Routing)
-> 
-> CIDR is a method for allocating IP addresses and routing Internet Protocol packets. CIDR uses a suffix (e.g., `/24`) to specify the exact number of bits that represent the network portion of the address. For example, `192.168.0.0/24` defines a network with addresses ranging from `192.168.0.0` to `192.168.0.255`. CIDR is commonly used in routing, firewall rules, and network segmentation to precisely define IP address ranges.
 
 ## Operators
 
@@ -90,8 +66,6 @@ Using the Netography Query Language is like writing a programming conditional in
 | `<=`       | less than                 |
 | `>=`       | greater than or equals to |
 | `>`        | greater tha               |
-
-For additional examples, see [NQL Examples](doc:nql-examples), or watch the [Video walkthroughs](doc:video-walkthroughs##netography-query-language-nql-in-10-minutes-or-less) NQL video.
 
 # Pattern Matching (Wildcards, RegEx, Fuzzy) in NQL
 
@@ -225,10 +199,6 @@ The following characters are reserved as operators and need to be escaped: `. ? 
 ## Fuzzy Matching
 
 Fuzzy matching accounts for variations in spelling by calculating the Levenshtein distance between terms.
-
-> 🤔 What is the Levenshtein Distance?
-> 
-> The Levenshtein distance is a metric for measuring the difference between two strings. It calculates the minimum number of single-character edits (insertions, deletions, or substitutions) required to change one string into another. For example, the Levenshtein distance between "kitten" and "sitting" is 3, because it requires three edits: replacing 'k' with 's', replacing 'e' with 'i', and adding 'g'. This metric is useful for fuzzy matching, where you want to find matches that are close, but not exact.
 
 ### Fuzzy Matching: Operator Syntax and Meaning
 
