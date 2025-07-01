@@ -165,13 +165,29 @@ If you prefer to run the MCP server manually instead of through VS Code or Claud
 uv run --directory NETO_MCP_SERVER_REPO_DIR neto-mcp-server
 ```
 
-## Troubleshooting
+## Specifying Transport
 
+When starting the MCP server, you can specify the transport method to use with the `--transport` (or `-t`) flag. The available options are:
+
+- `stdio`: Standard input/output (default)
+- `streamable-http`: Streamable HTTP
+- `sse`: Server-sent events
+
+For example, to start the server with streamable HTTP transport:
+
+```bash
+uv run --directory NETO_MCP_SERVER_REPO_DIR neto-mcp-server --transport streamable-http
+```
+
+## Troubleshooting/FAQ
 - **Server not starting?**
   Ensure `NETOSECRET` is set and dependencies are installed with `uv sync`.
 
 - **No response in Copilot Chat?**
   Confirm the MCP server is running and selected as a tool in Copilot Chat.
+
+- **No response from the LLM after running an MCP Tool?**
+  The context window is likely full. Try disabling unneeded tools or increasing the context window size.
 
 - **Copilot Chat is always calling the wrong API endpoint and never answering my questions?**
   MCP support in Copilot is very much in early and active development.  We have seen it work perfectly on one Copilot instance and fail entirely on another.  We have had more reliable results using Claude Desktop over Copilot Chat to interact with MCP servers (Anthropic created MCP so they are definitely a bit ahead in support right now).  You may want to try using VS Code Insider and the pre-release Copilot Chat extensions to get the latest features and fixes.
@@ -181,3 +197,6 @@ uv run --directory NETO_MCP_SERVER_REPO_DIR neto-mcp-server
 
 - **Permission errors?**
   Ensure that the `uv` executable and your project directory have the proper read/execute permissions.
+
+- **I don't see any resources available from the MCP server, only tools?**
+  The Model Context Protocol is rapidly evolving, and as such many LLM MCP clients do not yet support `resources`, using `tools` instead. Currently, these are functionally equivalent, but we anticipate that `resources` will be more widely supported in the future. At that time, we will transition to using `resources` more broadly for `GET` endpoints.
