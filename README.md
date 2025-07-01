@@ -17,7 +17,7 @@ A local MCP server for [Netography Fusion](https://netography.com/), supporting 
 ## Prerequisites
 
 - [uv](https://github.com/astral-sh/uv?tab=readme-ov-file#installation) - a Python package/dependency manager. Follow the [official instructions](https://github.com/astral-sh/uv?tab=readme-ov-file#installation) for your OS.
-- Python 3.8+
+- Python 3.11+
 - Access to Netography Fusion and a valid `NETOSECRET` API key
 
 ## Installation
