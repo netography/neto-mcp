@@ -12,7 +12,7 @@ A local MCP server for [Netography Fusion](https://netography.com/), supporting 
 - [Example Queries](#example-queries)
 - [Running the Server Manually](#running-the-server-manually)
 - [Specifying Transport](#specifying-transport)
-- [Troubleshooting](#troubleshooting)
+- [Troubleshooting/FAQ](#troubleshootingfaq)
 
 ## Prerequisites
 
