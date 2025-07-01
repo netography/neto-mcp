@@ -11,28 +11,25 @@ A local MCP server for [Netography Fusion](https://netography.com/), supporting 
 - [VS Code Integration](#vs-code-integration)
 - [Example Queries](#example-queries)
 - [Running the Server Manually](#running-the-server-manually)
+- [Specifying Transport](#specifying-transport)
 - [Troubleshooting](#troubleshooting)
 
 ## Prerequisites
 
-- [uv](https://github.com/astral-sh/uv?tab=readme-ov-file#installation) (Python package/dependency manager)
+- [uv](https://github.com/astral-sh/uv?tab=readme-ov-file#installation) - a Python package/dependency manager. Follow the [official instructions](https://github.com/astral-sh/uv?tab=readme-ov-file#installation) for your OS.
 - Python 3.8+
 - Access to Netography Fusion and a valid `NETOSECRET` API key
 
 ## Installation
 
-1. **Install `uv`**
-
-   Follow the [official instructions](https://github.com/astral-sh/uv?tab=readme-ov-file#installation) for your OS.
-
-2. **Clone the repository**
+1. **Clone the repository**
 
    ```bash
    git clone https://github.com/your-org/neto-mcp-server.git
    cd neto-mcp-server
    ```
 
-3. **Install dependencies**
+2. **Install dependencies**
 
    ```bash
    uv sync
