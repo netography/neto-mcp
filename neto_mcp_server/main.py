@@ -81,11 +81,6 @@ def customize_components(
 ) -> None:
     if route.path.startswith("/api/v1/search/"):
         component.description = f"{component.description} ALWAYS PASS A SIZE PARAMETER OF 1000 IF NOT OTHERWISE SPECIFIED."
-    # Use for debugging purposes
-    # if route.path.startswith("/api/v1/stats/"):
-    #     print(component.name)
-    #     print(component.description)
-    #     # print(component.parameters)
 
 
 mcp = FastMCP.from_openapi(
@@ -96,13 +91,9 @@ mcp = FastMCP.from_openapi(
         RouteMap(
             pattern=r"^/api/v1/labels/",
             mcp_type=MCPType.TOOL,
-            methods=["GET", "DELETE", "POST"],
+            methods=["GET"],
         ),
-        RouteMap(
-            pattern=r"^/api/v1/labels/[^/]+/bulk$",
-            mcp_type=MCPType.TOOL,
-            methods=["PUT"],
-        ),
+        RouteMap(pattern=r"^/api/v1/stats/[^/]+/ts", mcp_type=MCPType.EXCLUDE),
         RouteMap(pattern=r"^/api/v1/search/", mcp_type=MCPType.TOOL),
         RouteMap(pattern=r"^/api/v1/intel/", mcp_type=MCPType.TOOL),
         RouteMap(pattern=r"^/api/v1/vpc", mcp_type=MCPType.TOOL, methods=["GET"]),

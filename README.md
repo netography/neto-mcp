@@ -12,6 +12,7 @@ A local MCP server for [Netography Fusion](https://netography.com/), supporting 
 - [Example Queries](#example-queries)
 - [Running the Server Manually](#running-the-server-manually)
 - [Specifying Transport](#specifying-transport)
+- [Supported Tools](#supported-tools)
 - [Troubleshooting/FAQ](#troubleshootingfaq)
 
 ## Prerequisites
@@ -175,6 +176,45 @@ For example, to start the server with streamable HTTP transport:
 ```bash
 uv run --directory NETO_MCP_SERVER_REPO_DIR neto-mcp-server --transport streamable-http
 ```
+
+## Supported Tools
+
+All query endpoints in the Netography Fusion API are supported. As MCP clients continue to evolve, we will add resource creation and management endpoints as well. Currently, the following endpoints are available:
+Here are the tools and their descriptions in markdown format:
+
+- `search_context_fields_get`: Get valid fields that can be used in search API calls for a given data type.
+- `search_context_post`: Retrieve a list of individual events or records for a specified context over a given time range using an NQL query.
+- `stats_context_fields_get`: Get valid fields that can be used in statistical API calls for a given context.
+- `stats_context_aliases_get`: Get field aliases (shortcuts for multiple fields) for use in subsequent search API calls.
+- `stats_context_metrics_get`: Get valid metrics that can be used in statistical API calls for a given context.
+- `stats_context_agg_post`: Get summarized statistics by aggregating data for a specified context over a given time range.
+- `intel_lookup_asns_post`: Look up the organization name for one or more Autonomous System Numbers (ASNs).
+- `intel_lookup_ips_post`: Look up intelligence information (Geo, Reputation, RDNS, etc.) for one or more IP addresses.
+- `labels_ips_get`: Return a list of all IP labels.
+- `labels_ips_all_context_get`: Fetch all labels for all IPs within a specific context (e.g., 'location').
+- `labels_ips_ip_get`: Fetch all labels for a specific IP address.
+- `labels_ips_ip_context_get`: Fetch labels of a specific context for a given IP address.
+- `labels_ports_get`: Return a list of all port labels.
+- `labels_ports_protocols_get`: Return a list of all protocols that have port labels.
+- `labels_ports_all_protocol_get`: Fetch all port labels for a specific protocol (e.g., 'tcp').
+- `labels_ports_port_get`: Fetch all labels for a specific port number across all protocols.
+- `labels_port_protocol_get`: Fetch the label for a specific port and protocol combination.
+- `integrations_aws_role_get`: Get information for configuring AWS Role-based authentication, including Account ID and External ID.
+- `vpc_get`: Return a list of all configured Cloud Sources, with optional filtering.
+- `vpc_name_get`: Fetch a specific Cloud Source by its name.
+- `vpc_id_get`: Fetch a specific Cloud Source by its numeric ID.
+- `vpc_status_get`: Return the status for all configured Cloud Sources.
+- `vpc_status_id_get`: Fetch the status for a specific Cloud Source by its ID.
+- `vpc_regions_get`: Return all available cloud provider regions.
+- `vpc_regions_flowtype_get`: Return all available regions for a specific cloud provider (flowtype).
+- `integrations_context_get`: Return a list of all context integrations.
+- `integrations_context_id_get`: Fetch a specific context integration by its ID.
+- `integrations_context_id_run_get`: Run a specified context integration and return a list of IP labels that would be imported.
+- `integrations_response_get`: Return a list of all response integrations.
+- `integrations_response_id_get`: Fetch a specific response integration by its ID.
+- `nql_guide`: Provides a guide to NQL (Netography Query Language) for creating queries and searches.
+- `get_detection_model_list`: Get the list of available detection models.
+- `get_detection_model_details`: Get the details of a specific detection model.
 
 ## Troubleshooting/FAQ
 - **Server not starting?**
