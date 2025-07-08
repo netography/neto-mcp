@@ -134,7 +134,7 @@ Add the following to your VS Code `settings.json`, replacing the `NETO_MCP_SERVE
 
 1. Open the Command Palette (`Cmd+Shift+P`), search for "MCP: List Servers", and select the `netography` server and then select "Start Server".
 2. Confirm the server status is "running" in the MCP output panel.
-3. In Copilot Chat, type `@netography` as part of your chat to include usage of the MCP tool.  Alternatively, click 'Add Context...', select 'Tools', and choose the `netography` server.
+3. In Copilot Chat, click 'Add Context...', select 'Tools', and choose the `netography` server.
 
 ## Example Queries
 
@@ -237,3 +237,6 @@ Here are the tools and their descriptions in markdown format:
 
 - **I don't see any resources available from the MCP server, only tools?**
   The Model Context Protocol is rapidly evolving, and as such many LLM MCP clients do not yet support `resources`, using `tools` instead. Currently, these are functionally equivalent, but we anticipate that `resources` will be more widely supported in the future. At that time, we will transition to using `resources` more broadly for `GET` endpoints.
+
+- **Why are there two `netography` servers in the MCP server list in VSCode?**
+  If you have already configured the `netography` server in Claude Desktop, it will also appear in the MCP server list in VSCode if you have `chat.mcp.discovery.enabled` set to `true`. You can safely ignore the duplicate entry, change the name of the server in your VSCode settings, or disable MCP discovery in VSCode settings by setting `chat.mcp.discovery.enabled` to `false`.
