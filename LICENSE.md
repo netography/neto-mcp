@@ -1,0 +1,1 @@
+Software is provided for use by Netography Fusion customers only under the existing license terms your organization has agreed to for its product use.
