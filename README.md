@@ -26,7 +26,7 @@ A local MCP server for [Netography Fusion](https://netography.com/), supporting 
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/your-org/neto-mcp-server.git
+   git clone https://github.com/netography/neto-mcp-server.git
    cd neto-mcp-server
    ```
 
