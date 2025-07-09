@@ -60,6 +60,8 @@ source ~/.bash_profile
 
 ## Claude Desktop Integration
 
+**Note for Claude Desktop Free users:** The context is very limited for the free plan, so you may quickly receive a context limit error when interacting with the Netography MCP server.  Disabling some API endpoints/tools in your MCP server configuration will reduce context size.  The Claude Pro plan does not have this issue and is recommended.
+
 ### Setup
 
 1. **Locate the configuration file:**
@@ -103,9 +105,8 @@ source ~/.bash_profile
 
 Once configured, Claude Desktop will automatically load and manage the MCP server - no manual starting required. Simply mention Netography queries in your conversations and Claude will use the MCP tools to fetch data from your Fusion instance.  Clicking the search and tools icon (next to the +) in the chat box will allow you to select the `netography` server as a tool and select particular API endpoints to enable/disable
 
-**Note for Claude Desktop Free users:** Free tier users may encounter context length limitations when using multiple MCP tools. If you experience issues, consider disabling some API endpoints/tools in your MCP server configuration to reduce context size.
 
-## VS Code Integration
+## VS Code / Copilot Integration
 
 ### Setup
 
@@ -139,7 +140,7 @@ Add the following to your VS Code `settings.json`, replacing the `NETO_MCP_SERVE
 ## Example Queries
 
 - **Find top IPs:**
-  Find the top 10 IPs by flow volume in the past hour from Netography data.
+  Find the top 10 IPs by flow volume in the past hour from Netography
 
 - **Count traffic sources:**
   How many traffic sources are configured in Netography
